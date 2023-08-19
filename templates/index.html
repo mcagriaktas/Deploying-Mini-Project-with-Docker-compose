@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSV Upload and Visualization</title>
+</head>
+<body>
+    <h1>CSV Upload and Visualization</h1>
+
+    <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+        <label for="csvFile">Upload a CSV file:</label>
+        <input type="file" name="csvFile" id="csvFile" accept=".csv" required>
+        <label for="visualization_name">Enter a name for the visualization:</label>
+        <input type="text" name="visualization_name" id="visualization_name" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if plot_image %}
+    <h2>Visualization</h2>
+    <img src="data:image/png;base64,{{ plot_image }}" alt="Visualization">
+    {% endif %}
+
+    <h2>Retrieve Visualization</h2>
+    <form action="{{ url_for('retrieve') }}" method="post">
+        <label for="retrieval_name">Enter the name used for upload:</label>
+        <input type="text" name="retrieval_name" id="retrieval_name" required>
+        <button type="submit">Retrieve</button>
+    </form>
+</body>
+</html>
